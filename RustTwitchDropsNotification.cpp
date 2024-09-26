@@ -75,14 +75,16 @@ static void ReadWebPageHTML(const wchar_t* url) {
     // Initialize WinINet
     hInternet = InternetOpen(L"WinINet Sample", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
     if (!hInternet) {
-        std::cerr << "InternetOpen failed" << std::endl;
+        std::string cerrMsg = "InternetOpen failed\n";
+        OutputDebugStringA(cerrMsg.c_str());
         return;
     }
 
     // Connect to the website
     hConnect = InternetOpenUrl(hInternet, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);
     if (!hConnect) {
-        std::cerr << "InternetOpenUrl failed" << std::endl;
+        std::string cerrMsg = "InternetOpenUrl failed\n";
+        OutputDebugStringA(cerrMsg.c_str());
         InternetCloseHandle(hInternet);
         return;
     }
